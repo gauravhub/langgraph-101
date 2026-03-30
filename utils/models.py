@@ -18,11 +18,11 @@ To use a different LLM provider, follow these steps:
 """
 
 """Default Models"""
-from dotenv import load_dotenv
-load_dotenv(dotenv_path="../../.env", override=True)
-from langchain.chat_models import init_chat_model
+# from dotenv import load_dotenv
+# load_dotenv(dotenv_path="../../.env", override=True)
+# from langchain.chat_models import init_chat_model
 
-model = init_chat_model("openai:gpt-4.1-mini")
+# model = init_chat_model("openai:gpt-4.1-mini")
 
 # Use Anthropic instead of OpenAI
 # model = init_chat_model("anthropic:claude-haiku-4-5")
@@ -58,24 +58,26 @@ model = init_chat_model("openai:gpt-4.1-mini")
 
 
 """Bedrock Version"""
-# from dotenv import load_dotenv
-# from langchain_aws import ChatBedrockConverse
-# import os
+from dotenv import load_dotenv
+from langchain_aws import ChatBedrockConverse
+import os
 
-# load_dotenv(dotenv_path="../.env", override=True)
+load_dotenv(dotenv_path="../.env", override=True)
 
-# AWS_ACCESS_KEY_ID=os.getenv("AWS_ACCESS_KEY_ID")
-# AWS_SECRET_ACCESS_KEY=os.getenv("AWS_SECRET_ACCESS_KEY")
-# AWS_REGION_NAME=os.getenv("AWS_REGION_NAME")
-# AWS_MODEL_ARN=os.getenv("AWS_MODEL_ARN")
+AWS_ACCESS_KEY_ID=os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY=os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_SESSION_TOKEN=os.getenv("AWS_SESSION_TOKEN")
+AWS_REGION_NAME=os.getenv("AWS_REGION_NAME")
+AWS_MODEL_ARN=os.getenv("AWS_MODEL_ARN")
 
-# model = ChatBedrockConverse(
-#     aws_access_key_id=AWS_ACCESS_KEY_ID,
-#     aws_secret_access_key=AWS_SECRET_ACCESS_KEY, 
-#     region_name=AWS_REGION_NAME,
-#     provider="anthropic",
-#     model_id=AWS_MODEL_ARN
-# )
+model = ChatBedrockConverse(
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+    aws_session_token=AWS_SESSION_TOKEN,
+    region_name=AWS_REGION_NAME,
+    provider="anthropic",
+    model_id=AWS_MODEL_ARN
+)
 
 
 """Google Vertex AI version"""
